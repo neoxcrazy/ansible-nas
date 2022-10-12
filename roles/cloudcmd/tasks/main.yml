@@ -31,7 +31,7 @@
           traefik.http.routers.cloudcmd.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.cloudcmd.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.cloudcmd.loadbalancer.server.port: "8000"
-  when: cloudcmd_enabled is true
+  when: cloudcmd_enabled|default(false)|bool == true
 
 - name: Stop Cloudcmd
   block:
@@ -39,4 +39,4 @@
       docker_container:
         name: "{{ cloudcmd_container_name }}"
         state: absent
-  when: cloudcmd_enabled is false
+  when: cloudcmd_enabled|default(false)|bool == false

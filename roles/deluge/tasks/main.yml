@@ -32,7 +32,7 @@
           traefik.http.routers.deluge.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.deluge.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.deluge.loadbalancer.server.port: "8112"
-  when: deluge_enabled is true
+  when: deluge_enabled|default(false)|bool == true
 
 - name: Stop Deluge
   block:
@@ -40,4 +40,4 @@
       docker_container:
         name: "{{ deluge_container_name }}"
         state: absent
-  when: deluge_enabled is false
+  when: deluge_enabled|default(false)|bool == false

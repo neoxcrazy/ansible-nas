@@ -59,7 +59,7 @@
           traefik.http.routers.firefly.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.firefly.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.firefly.loadbalancer.server.port: "8080"
-  when: firefly_enabled is true
+  when: firefly_enabled|default(false)|bool == true
 
 - name: Stop Firefly
   block:
@@ -72,4 +72,4 @@
       docker_container:
         name: "{{ firefly_mysql_container_name }}"
         state: absent
-  when: firefly_enabled is false
+  when: firefly_enabled|default(false)|bool == false

@@ -33,7 +33,7 @@
           traefik.http.routers.emby.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.emby.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.emby.loadbalancer.server.port: "8096"
-  when: emby_enabled is true
+  when: emby_enabled|default(false)|bool == true
 
 - name: Stop Emby
   block:
@@ -41,4 +41,4 @@
       docker_container:
         name: "{{ emby_container_name }}"
         state: absent
-  when: emby_enabled is false
+  when: emby_enabled|default(false)|bool == false

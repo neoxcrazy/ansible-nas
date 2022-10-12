@@ -32,7 +32,7 @@
           traefik.http.routers.calibre.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.calibre.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.calibre.loadbalancer.server.port: "8083"
-  when: calibre_enabled is true
+  when: calibre_enabled|default(false)|bool == true
 
 - name: Stop Calibre
   block:
@@ -40,4 +40,4 @@
       docker_container:
         name: "{{ calibre_container_name }}"
         state: absent
-  when: calibre_enabled is false
+  when: calibre_enabled|default(false)|bool == false

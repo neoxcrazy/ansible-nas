@@ -58,7 +58,7 @@
           traefik.http.routers.gitea.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.gitea.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.gitea.loadbalancer.server.port: "3000"
-  when: gitea_enabled is true
+  when: gitea_enabled|default(false)|bool == true
 
 - name: Stop Gitea
   block:
@@ -71,4 +71,4 @@
       docker_container:
         name: "{{ gitea_mysql_container_name }}"
         state: absent
-  when: gitea_enabled is false
+  when: gitea_enabled|default(false)|bool == false

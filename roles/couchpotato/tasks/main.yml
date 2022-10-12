@@ -34,7 +34,7 @@
           traefik.http.routers.couchpotato.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.couchpotato.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.couchpotato.loadbalancer.server.port: "5050"
-  when: couchpotato_enabled is true
+  when: couchpotato_enabled|default(false)|bool == true
 
 - name: Stop Couchpotato
   block:
@@ -42,4 +42,4 @@
       docker_container:
         name: "{{ couchpotato_container_name }}"
         state: absent
-  when: couchpotato_enabled is false
+  when: couchpotato_enabled|default(false)|bool == false

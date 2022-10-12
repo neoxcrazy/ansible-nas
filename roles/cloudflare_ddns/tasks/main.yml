@@ -27,7 +27,7 @@
         restart_policy: unless-stopped
         memory: "{{ cloudflare_memory }}"
         recreate: "{{ template_files_result is changed }}"
-  when: cloudflare_ddns_enabled is true
+  when: cloudflare_ddns_enabled|default(false)|bool == true
 
 - name: Stop Cloudflare DDNS
   block:
@@ -35,4 +35,4 @@
       docker_container:
         name: "{{ cloudflare_container_name }}"
         state: absent
-  when: cloudflare_ddns_enabled is false
+  when: cloudflare_ddns_enabled|default(false)|bool == false

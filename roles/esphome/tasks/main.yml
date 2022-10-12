@@ -31,7 +31,7 @@
           traefik.http.routers.esphome.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.esphome.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.esphome.loadbalancer.server.port: "80"
-  when: esphome_enabled is true
+  when: esphome_enabled|default(false)|bool == true
 
 - name: Stop EspHome
   block:
@@ -39,4 +39,4 @@
       docker_container:
         name: "{{ esphome_container_name }}"
         state: absent
-  when: esphome_enabled is false
+  when: esphome_enabled|default(false)|bool == false

@@ -26,7 +26,7 @@
           traefik.http.routers.hello_world.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.hello_world.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.hello_world.loadbalancer.server.port: "4040"
-  when: hello_world_enabled is true
+  when: hello_world_enabled|default(false)|bool == true
 
 - name: Stop Hello World
   block:
@@ -34,4 +34,4 @@
       docker_container:
         name: "{{ hello_world_container_name }}"
         state: absent
-  when: hello_world_enabled is false
+  when: hello_world_enabled|default(false)|bool == false

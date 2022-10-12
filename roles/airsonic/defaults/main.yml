@@ -1,5 +1,5 @@
 ---
-airsonic_enabled: false
+airsonic_enabled: False
 airsonic_available_externally: false
 
 # directories

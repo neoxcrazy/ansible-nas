@@ -25,7 +25,7 @@
           traefik.http.routers.code_server.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.code_server.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.code_server.loadbalancer.server.port: "8443"
-  when: code_server_enabled is true
+  when: code_server_enabled|default(false)|bool == true
 
 - name: Stop Code Server
   block:
@@ -33,4 +33,4 @@
       docker_container:
         name: "{{ code_server_container_name }}"
         state: absent
-  when: code_server_enabled is false
+  when: code_server_enabled|default(false)|bool == false

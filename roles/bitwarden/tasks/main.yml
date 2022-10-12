@@ -52,7 +52,7 @@
         restart_policy: unless-stopped
         volumes_from: bitwarden
         memory: "{{ bitwarden_backup_memory }}"
-  when: bitwarden_enabled is true
+  when: bitwarden_enabled|default(false)|bool == true
 
 - name: Stop Bitwarden
   block:
@@ -65,4 +65,4 @@
       docker_container:
         name: "{{ bitwarden_backup_container_name }}"
         state: absent
-  when: bitwarden_enabled is false
+  when: bitwarden_enabled|default(false)|bool == false

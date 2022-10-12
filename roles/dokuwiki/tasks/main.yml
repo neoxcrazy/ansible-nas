@@ -30,7 +30,7 @@
           traefik.http.routers.dokuwiki.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.dokuwiki.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.dokuwiki.loadbalancer.server.port: "80"
-  when: dokuwiki_enabled is true
+  when: dokuwiki_enabled|default(false)|bool == true
 
 - name: Stop Dokuwiki
   block:
@@ -38,4 +38,4 @@
       docker_container:
         name: "{{ dokuwiki_container_name }}"
         state: absent
-  when: dokuwiki_enabled is false
+  when: dokuwiki_enabled|default(false)|bool == false

@@ -2,7 +2,7 @@
 - name: Check for Gitea installation
   fail:
     msg: "Woodpecker-CI requires Gitea enabled and running for authentication, please set that up first."
-  when: gitea_enabled is false
+  when: gitea_enabled|default(false)|bool == false
 
 - name: Check for Gitea config
   fail:

@@ -37,7 +37,7 @@
           traefik.http.routers.duplicacy.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.duplicacy.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.duplicacy.loadbalancer.server.port: "3875"
-  when: duplicacy_enabled is true
+  when: duplicacy_enabled|default(false)|bool == true
 
 - name: Stop Duplicacy
   block:
@@ -45,4 +45,4 @@
       docker_container:
         name: "{{ duplicacy_container_name }}"
         state: absent
-  when: duplicacy_enabled is false
+  when: duplicacy_enabled|default(false)|bool == false

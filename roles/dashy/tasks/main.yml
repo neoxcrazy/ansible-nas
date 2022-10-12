@@ -17,7 +17,7 @@
           traefik.http.routers.dashy.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.dashy.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.dashy.loadbalancer.server.port: "80"
-  when: dashy_enabled is true
+  when: dashy_enabled|default(false)|bool == true
 
 - name: Stop Dashy
   block:
@@ -25,4 +25,4 @@
       docker_container:
         name: "{{ dashy_container_name }}"
         state: absent
-  when: dashy_enabled is false
+  when: dashy_enabled|default(false)|bool == false
