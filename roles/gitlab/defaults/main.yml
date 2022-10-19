@@ -14,3 +14,6 @@ gitlab_port_ssh: "422"
 
 # specs
 gitlab_memory: "4g"
+
+gitlab_user_id: "998"
+gitlab_group_id: "998"
