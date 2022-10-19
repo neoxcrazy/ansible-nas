@@ -9,6 +9,7 @@ roles/bertvv.samba
 roles/geerlingguy.docker
 roles/geerlingguy.nfs
 
+tests/inventories/integration_testing/group_vars/nas.yml
 # Vim
 [._]sw[a-p]
 

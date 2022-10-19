@@ -11,4 +11,42 @@
 
 # Example options
 ansible_nas_hostname: ansible-nas-test
-ansible_nas_timezone: Europe/London
+ansible_nas_timezone: America/Sao_Paulo
+
+docker_home: /home/docker/volumes/
+
+bitwarden_enabled: true
+bitwarden_admin_token: 
+bitwarden_allow_signups: true
+
+mealie_enabled: true	
+
+tiddlywiki_enabled: true	
+
+#heimdall_enabled: true
+
+#organizr_enabled: true
+
+#gitea_enabled: true
+
+gitlab_enabled: true
+
+
+
+#speedtest_enabled: true
+
+#glances_enabled: true
+
+wireshark_enabled: true
+
+rssbridge_enabled: true
+
+#freshrss_enabled: true
+
+#firefly_enabled: true
+
+guacamole_enabled: true
+
+#duplicacy_enabled: true
+
+portainer_enabled: true
