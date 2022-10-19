@@ -17,3 +17,8 @@ gitea_mysql_memory: 1g
 # docker
 gitea_container_name: gitea
 gitea_mysql_container_name: gitea-mysql
+
+
+gitea_mysql_user_name: 'gitea'
+gitea_mysql_user_password: 'gitea'
+gitea_mysql_root_password: 'gitea'

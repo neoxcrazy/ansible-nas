@@ -19,9 +19,9 @@
           - "{{ gitea_data_directory }}/mysql:/var/lib/mysql:rw"
         env:
           MYSQL_DATABASE: "gitea"
-          MYSQL_USER: "gitea"
-          MYSQL_PASSWORD: "gitea"
-          MYSQL_ROOT_PASSWORD: "gitea"
+          MYSQL_USER: "{{ gitea_mysql_user_name }}"
+          MYSQL_PASSWORD: "{{ gitea_mysql_user_password }}"
+          MYSQL_ROOT_PASSWORD: "{{ gitea_mysql_root_password }}"
         restart_policy: unless-stopped
         memory: "{{ gitea_mysql_memory }}"
 
